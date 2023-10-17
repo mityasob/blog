@@ -1,8 +1,8 @@
-import React from "react";
-import "./ArticlesList.css";
-import ArticlePreview from "../ArticlePreview/ArticlePreview";
+import React from 'react';
+import './ArticlesList.css';
+import ArticlePreview from '../ArticlePreview/ArticlePreview';
 
-import { Spin, Space } from "antd";
+import { Spin, Space } from 'antd';
 
 const ArticlesList = ({ articles, pageNumber, loggedIn, token }) => {
   const visibleArticles = [];
@@ -12,21 +12,14 @@ const ArticlesList = ({ articles, pageNumber, loggedIn, token }) => {
     }
   }
   const articleList = visibleArticles.map((element) => {
-    return (
-      <ArticlePreview
-        key={element.slug}
-        articleProps={element}
-        loggedIn={loggedIn}
-        token={token}
-      />
-    );
+    return <ArticlePreview key={element.slug} articleProps={element} loggedIn={loggedIn} token={token} />;
   });
   if (articles.length) {
-    return <ul className='articles-list'>{articleList}</ul>;
+    return <ul className="articles-list">{articleList}</ul>;
   }
   return (
-    <Space size='middle'>
-      <Spin size='large' />
+    <Space size="middle">
+      <Spin size="large" />
     </Space>
   );
 };

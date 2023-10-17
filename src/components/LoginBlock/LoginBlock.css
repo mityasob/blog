@@ -62,7 +62,8 @@
   margin: 0 27px;
 }
 
-.header-profile:hover, .header-profile:active {
+.header-profile:hover,
+.header-profile:active {
   cursor: pointer;
 }
 

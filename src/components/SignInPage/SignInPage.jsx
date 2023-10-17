@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import React, { useState } from 'react';
+import { Link, Navigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
-import "./SignInPage.css";
+import './SignInPage.css';
 
 const SignInPage = ({ saveToken, logIn }) => {
   const [isSignInSuccess, setIsSignInSuccess] = useState(false);
@@ -13,31 +13,31 @@ const SignInPage = ({ saveToken, logIn }) => {
     formState: { errors },
   } = useForm();
   return (
-    <section className='articles-list-container'>
-      {isSignInSuccess && <Navigate to='/' />}
-      <div className='sign-up-container'>
+    <section className="articles-list-container">
+      {isSignInSuccess && <Navigate to="/" />}
+      <div className="sign-up-container">
         <form
-          className='authorization-form'
+          className="authorization-form"
           onSubmit={handleSubmit((data, event) => {
             event.preventDefault();
             const requestOptions = {
-              method: "POST",
+              method: 'POST',
               headers: {
-                accept: "application/json",
-                "Content-Type": "application/json;charset=utf-8",
+                accept: 'application/json',
+                'Content-Type': 'application/json;charset=utf-8',
               },
               body: `{"user": {
                 "email": "${data.email}",
                 "password": "${data.password}"
               }}`,
             };
-            fetch("https://blog.kata.academy/api/users/login", requestOptions)
+            fetch('https://blog.kata.academy/api/users/login', requestOptions)
               .then((res) => {
                 return res.json();
               })
               .then((res) => {
                 if (res.user) {
-                  localStorage.setItem("token", res.user.token);
+                  localStorage.setItem('token', res.user.token);
                   saveToken();
                   logIn();
                   setIsSignInSuccess(true);
@@ -48,57 +48,55 @@ const SignInPage = ({ saveToken, logIn }) => {
               });
           })}
         >
-          <p className='form-header'>Sign In</p>
-          <div className='form-fields'>
+          <p className="form-header">Sign In</p>
+          <div className="form-fields">
             <label>
-              <p className='field-label'>Email address</p>
+              <p className="field-label">Email address</p>
               <input
-                {...register("email", { required: true })}
-                type='email'
-                className='field-input'
-                placeholder='Email adress'
+                {...register('email', { required: true })}
+                type="email"
+                className="field-input"
+                placeholder="Email adress"
               ></input>
               {errors.email && (
-                <div className='input-error-message-container'>
-                  <div className='warning-input'></div>
-                  <p className='input-error-message'>
-                    Email address is required
-                  </p>
+                <div className="input-error-message-container">
+                  <div className="warning-input"></div>
+                  <p className="input-error-message">Email address is required</p>
                 </div>
               )}
             </label>
             <label>
-              <p className='field-label'>Password</p>
+              <p className="field-label">Password</p>
               <input
-                {...register("password", {
+                {...register('password', {
                   required: true,
                 })}
-                type='password'
-                className='field-input'
-                placeholder='Password'
+                type="password"
+                className="field-input"
+                placeholder="Password"
               ></input>
               {errors.password && (
-                <div className='input-error-message-container'>
-                  <div className='warning-input'></div>
-                  <p className='input-error-message'>Password is required</p>
+                <div className="input-error-message-container">
+                  <div className="warning-input"></div>
+                  <p className="input-error-message">Password is required</p>
                 </div>
               )}
             </label>
           </div>
-          <div className='form-footer'>
+          <div className="form-footer">
             {signInError && (
-              <div className='sign-up-error-container'>
-                <p className='sign-up-error-message'>Wrong email or password</p>
+              <div className="sign-up-error-container">
+                <p className="sign-up-error-message">Wrong email or password</p>
               </div>
             )}
-            <button type='submit' className='sign-up-submit'>
+            <button type="submit" className="sign-up-submit">
               <span>Login</span>
             </button>
-            <div className='sign-in-block'>
-              <p className='sign-in-hint'>
-                Don't have an account?{" "}
-                <Link to={"/sign-up"}>
-                  <span className='link-style'>Sign up</span>
+            <div className="sign-in-block">
+              <p className="sign-in-hint">
+                Don't have an account?{' '}
+                <Link to={'/sign-up'}>
+                  <span className="link-style">Sign up</span>
                 </Link>
                 .
               </p>

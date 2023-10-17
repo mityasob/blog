@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
-import "./App.css";
-import Header from "../Header";
-import ArticlesListContainer from "../ArticlesListContainer";
-import Article from "../Article/Article";
-import SignUpPage from "../SignUpPage/SignUpPage";
-import SignInPage from "../SignInPage/SignInPage";
-import EditProfilePage from "../EditProfilePage";
-import CreateArticlePage from "../CreateArticlePage/CreateArticlePage";
-import EditArticlePage from "../EditArticlePage/EditArticlePage";
+import './App.css';
+import Header from '../Header';
+import ArticlesListContainer from '../ArticlesListContainer';
+import Article from '../Article/Article';
+import SignUpPage from '../SignUpPage/SignUpPage';
+import SignInPage from '../SignInPage/SignInPage';
+import EditProfilePage from '../EditProfilePage';
+import CreateArticlePage from '../CreateArticlePage/CreateArticlePage';
+import EditArticlePage from '../EditArticlePage/EditArticlePage';
 
 const App = () => {
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(localStorage.getItem('token'));
   const [loggedIn, setLoggedIn] = useState(Boolean(token));
   const [list, setList] = useState([]);
   const [articlesCount, setArticlesCount] = useState(0);
@@ -36,11 +36,11 @@ const App = () => {
   };
   const logOut = () => {
     localStorage.clear();
-    setToken(localStorage.getItem("token"));
+    setToken(localStorage.getItem('token'));
     setLoggedIn(false);
   };
   const saveToken = () => {
-    setToken(localStorage.getItem("token"));
+    setToken(localStorage.getItem('token'));
   };
   useEffect(() => {
     const requestOptions = {
@@ -48,7 +48,7 @@ const App = () => {
         Authorization: `Token ${token}`,
       },
     };
-    fetch("https://blog.kata.academy/api/articles", requestOptions)
+    fetch('https://blog.kata.academy/api/articles', requestOptions)
       .then((res) => {
         const reader = res.json();
         return reader;
@@ -63,11 +63,11 @@ const App = () => {
   }, [token, list]);
 
   return (
-    <section className='articles-list-page'>
+    <section className="articles-list-page">
       <Header token={token} loggedIn={loggedIn} logOut={logOut} />
       <Routes>
         <Route
-          path='/articles?'
+          path="/articles?"
           element={
             <ArticlesListContainer
               articles={list}
@@ -98,36 +98,15 @@ const App = () => {
             />
           }
         />
+        <Route path="/articles/:slug" element={<Article token={token} loggedIn={loggedIn} />} />
+        <Route path="/sign-up" element={<SignUpPage saveToken={saveToken} logIn={logIn} />} />
+        <Route path="/sign-in" element={<SignInPage saveToken={saveToken} logIn={logIn} />} />
         <Route
-          path='/articles/:slug'
-          element={<Article token={token} loggedIn={loggedIn} />}
+          path="/edit-profile"
+          element={<EditProfilePage token={token} saveToken={saveToken} loggedIn={loggedIn} />}
         />
-        <Route
-          path='/sign-up'
-          element={<SignUpPage saveToken={saveToken} logIn={logIn} />}
-        />
-        <Route
-          path='/sign-in'
-          element={<SignInPage saveToken={saveToken} logIn={logIn} />}
-        />
-        <Route
-          path='/edit-profile'
-          element={
-            <EditProfilePage
-              token={token}
-              saveToken={saveToken}
-              loggedIn={loggedIn}
-            />
-          }
-        />
-        <Route
-          path='/new-article'
-          element={<CreateArticlePage token={token} loggedIn={loggedIn} />}
-        />
-        <Route
-          path='/articles/:slug/edit'
-          element={<EditArticlePage token={token} loggedIn={loggedIn} />}
-        />
+        <Route path="/new-article" element={<CreateArticlePage token={token} loggedIn={loggedIn} />} />
+        <Route path="/articles/:slug/edit" element={<EditArticlePage token={token} loggedIn={loggedIn} />} />
       </Routes>
     </section>
   );

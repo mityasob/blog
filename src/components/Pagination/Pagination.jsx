@@ -1,26 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import "./Pagination.css";
+import './Pagination.css';
 
-const Pagination = ({
-  articlesCount,
-  pageNumber,
-  switchPage,
-  useLeftArrow,
-  useRightArrow,
-}) => {
+const Pagination = ({ articlesCount, pageNumber, switchPage, useLeftArrow, useRightArrow }) => {
   const pagesCount = Math.floor(articlesCount / 5);
   const isSelected = (liNumber) => {
     if (liNumber === pageNumber) {
-      return "page-selected";
+      return 'page-selected';
     } else {
-      return "page-non-selected";
+      return 'page-non-selected';
     }
   };
-  const leftArrowIsActive = pageNumber > 1 ? "" : "left-arrow-non-active";
-  const rightArrowIsActive =
-    pageNumber < Math.ceil(articlesCount / 5) ? "" : "right-arrow-non-active";
+  const leftArrowIsActive = pageNumber > 1 ? '' : 'left-arrow-non-active';
+  const rightArrowIsActive = pageNumber < Math.ceil(articlesCount / 5) ? '' : 'right-arrow-non-active';
   const pageNumbers = [];
   for (let i = 1; i <= pagesCount; i++) {
     pageNumbers.push(
@@ -47,22 +40,16 @@ const Pagination = ({
   };
 
   return (
-    <ul className='pagination'>
+    <ul className="pagination">
       <li>
         <Link to={`/${pageNumberDecrease(pageNumber)}`}>
-          <div
-            className={`arrow arrow-left ${leftArrowIsActive}`}
-            onClick={useLeftArrow}
-          ></div>
+          <div className={`arrow arrow-left ${leftArrowIsActive}`} onClick={useLeftArrow}></div>
         </Link>
       </li>
       {pageNumbers}
       <li>
         <Link to={`/${pageNumberIncrease(pageNumber)}`}>
-          <div
-            className={`arrow arrow-right ${rightArrowIsActive}`}
-            onClick={useRightArrow}
-          ></div>
+          <div className={`arrow arrow-right ${rightArrowIsActive}`} onClick={useRightArrow}></div>
         </Link>
       </li>
     </ul>

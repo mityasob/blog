@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import React, { useEffect, useState } from 'react';
+import { Navigate, useParams } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
-import "./EditArticlePage.css";
+import './EditArticlePage.css';
 
 const EditArticlePage = ({ token, loggedIn }) => {
   const { slug } = useParams();
@@ -10,7 +10,6 @@ const EditArticlePage = ({ token, loggedIn }) => {
   const [tagList, setTaglist] = useState([]);
   const [editArticleSuccess, setEditArticleSuccess] = useState(false);
   const [editArticleError, setEditArticleError] = useState(false);
-  console.log(tagList);
 
   const {
     register,
@@ -38,26 +37,26 @@ const EditArticlePage = ({ token, loggedIn }) => {
 
   const newTagArray = tagList?.map((element) => {
     return (
-      <li key={element} className='tags-list-element'>
-        <div className='field-input tag-input'>{element}</div>
+      <li key={element} className="tags-list-element">
+        <div className="field-input tag-input">{element}</div>
       </li>
     );
   });
 
   return (
-    <section className='articles-list-container'>
-      {!loggedIn && <Navigate to='/sign-in' />}
+    <section className="articles-list-container">
+      {!loggedIn && <Navigate to="/sign-in" />}
       {editArticleSuccess && <Navigate to={`/articles/${slug}`} />}
-      <div className='article-editor-page'>
+      <div className="article-editor-page">
         <form
-          className='create-article-form'
+          className="create-article-form"
           onSubmit={handleSubmit((data, event) => {
             event.preventDefault();
             const requestOptions = {
-              method: "PUT",
+              method: 'PUT',
               headers: {
                 Authorization: `Token ${token}`,
-                "Content-Type": "application/json;charset=utf-8",
+                'Content-Type': 'application/json;charset=utf-8',
               },
               body: `{
               "article": {
@@ -67,10 +66,7 @@ const EditArticlePage = ({ token, loggedIn }) => {
               }
           }`,
             };
-            fetch(
-              `https://blog.kata.academy/api/articles/${slug}`,
-              requestOptions
-            )
+            fetch(`https://blog.kata.academy/api/articles/${slug}`, requestOptions)
               .then((res) => {
                 return res.json();
               })
@@ -86,79 +82,72 @@ const EditArticlePage = ({ token, loggedIn }) => {
         >
           <h3>Edit article</h3>
           <label>
-            <p className='create-article-field-label'>Title</p>
+            <p className="create-article-field-label">Title</p>
             <input
-              {...register("title", {
+              {...register('title', {
                 required: true,
                 maxLength: 60,
                 pattern: /[^\s]+/,
               })}
-              type='text'
-              className='field-input'
-              placeholder='Title'
+              type="text"
+              className="field-input"
+              placeholder="Title"
             />
             {errors.title && (
-              <div className='input-error-message-container'>
-                <div className='warning-input'></div>
-                <p className='input-error-message'>Title is required</p>
+              <div className="input-error-message-container">
+                <div className="warning-input"></div>
+                <p className="input-error-message">Title is required</p>
               </div>
             )}
           </label>
           <label>
-            <p className='create-article-field-label'>Short description</p>
+            <p className="create-article-field-label">Short description</p>
             <input
-              {...register("description", {
+              {...register('description', {
                 required: true,
                 pattern: /[^\s]+/,
               })}
-              type='text'
-              className='field-input'
-              placeholder='Short description'
+              type="text"
+              className="field-input"
+              placeholder="Short description"
             />
             {errors.description && (
-              <div className='input-error-message-container'>
-                <div className='warning-input'></div>
-                <p className='input-error-message'>
-                  Short description is required
-                </p>
+              <div className="input-error-message-container">
+                <div className="warning-input"></div>
+                <p className="input-error-message">Short description is required</p>
               </div>
             )}
           </label>
           <label>
-            <p className='create-article-field-label'>Text</p>
+            <p className="create-article-field-label">Text</p>
             <textarea
-              {...register("text", {
+              {...register('text', {
                 required: true,
                 pattern: /[^\s]+/,
               })}
-              type='textarea'
-              className='field-input textarea-input'
-              placeholder='Text'
-              rows='7'
+              type="textarea"
+              className="field-input textarea-input"
+              placeholder="Text"
+              rows="7"
             ></textarea>
             {errors.text && (
-              <div className='input-error-message-container'>
-                <div className='warning-input textarea-warning-input'></div>
-                <p className='input-error-message'>Text is required</p>
+              <div className="input-error-message-container">
+                <div className="warning-input textarea-warning-input"></div>
+                <p className="input-error-message">Text is required</p>
               </div>
             )}
           </label>
-          <div className='create-article-form-tags-container'>
-            <p className='create-article-field-label'>Tags</p>
-            <ul className='form-tags-list'>{newTagArray}</ul>
+          <div className="create-article-form-tags-container">
+            <p className="create-article-field-label">Tags</p>
+            <ul className="form-tags-list">{newTagArray}</ul>
           </div>
-          <div className='form-footer'>
+          <div className="form-footer">
             {editArticleError && (
-              <div className='sign-up-error-container'>
-                <p className='sign-up-error-message'>
-                  Error! Try to refresh page and create article again!
-                </p>
+              <div className="sign-up-error-container">
+                <p className="sign-up-error-message">Error! Try to refresh page and create article again!</p>
               </div>
             )}
-            <button
-              type='submit'
-              className='sign-up-submit send-article-button'
-            >
+            <button type="submit" className="sign-up-submit send-article-button">
               <span>Send</span>
             </button>
           </div>
