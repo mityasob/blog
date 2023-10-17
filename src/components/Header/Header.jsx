@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import './Header.css';
 import LoginBlock from '../LoginBlock/LoginBlock';
-import { Link } from 'react-router-dom';
 
 const Header = ({ token, loggedIn, logOut }) => {
   return (

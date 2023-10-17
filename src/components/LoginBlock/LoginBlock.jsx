@@ -56,12 +56,12 @@ const LoginBlock = ({ token, loggedIn, logOut }) => {
 
   return (
     <div className="login-block">
-      <Link to={`/sign-in`}>
+      <Link to={'/sign-in'}>
         <button className="sign-in">
           <h6 className="login-text sign-in-text">Sign In</h6>
         </button>
       </Link>
-      <Link to={`/sign-up`}>
+      <Link to={'/sign-up'}>
         <button className="sign-up">
           <h6 className="login-text sign-up-text">Sign Up</h6>
         </button>

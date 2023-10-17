@@ -93,7 +93,7 @@ const Article = ({ token, loggedIn }) => {
         Authorization: `Token ${token}`,
       },
     };
-    fetch(`https://blog.kata.academy/api/articles/${slug}`, requestOptions).then((res) => {
+    fetch(`https://blog.kata.academy/api/articles/${slug}`, requestOptions).then(() => {
       setIsArticleDeleted(true);
     });
   };

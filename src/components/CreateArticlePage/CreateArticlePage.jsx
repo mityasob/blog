@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Navigate } from 'react-router-dom';
 
 import './CreateArticlePage.css';
-import { Navigate } from 'react-router-dom';
 
 const CreateArticlePage = ({ token, loggedIn }) => {
   const [createArticleSuccess, setCreateArticleSuccess] = useState(false);

@@ -94,7 +94,7 @@ const SignInPage = ({ saveToken, logIn }) => {
             </button>
             <div className="sign-in-block">
               <p className="sign-in-hint">
-                Don't have an account?{' '}
+                Don&apos;t have an account?
                 <Link to={'/sign-up'}>
                   <span className="link-style">Sign up</span>
                 </Link>

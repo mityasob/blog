@@ -1,8 +1,8 @@
 import React from 'react';
+import { Spin, Space } from 'antd';
+
 import './ArticlesList.css';
 import ArticlePreview from '../ArticlePreview/ArticlePreview';
-
-import { Spin, Space } from 'antd';
 
 const ArticlesList = ({ articles, pageNumber, loggedIn, token }) => {
   const visibleArticles = [];
