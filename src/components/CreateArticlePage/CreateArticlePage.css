@@ -1,0 +1,112 @@
+.article-editor-page {
+  display: flex;
+  width: 938px;
+  padding: 48px 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 21px;
+  margin-top: 34px;
+  border-radius: 6px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  box-shadow: 0px 0.6088px 2.93329px 0px rgba(0, 0, 0, 0.02),
+    0px 1.46302px 7.04911px 0px rgba(0, 0, 0, 0.03),
+    0px 2.75474px 13.27285px 0px rgba(0, 0, 0, 0.04),
+    0px 4.91399px 23.67649px 0px rgba(0, 0, 0, 0.04),
+    0px 9.19107px 44.28427px 0px rgba(0, 0, 0, 0.05),
+    0px 22px 106px 0px rgba(0, 0, 0, 0.07);
+}
+
+.create-article-form {
+  width: 100%;
+}
+
+.article-editor-page h3 {
+  margin: 0;
+  color: #262626;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.create-article-field-label {
+  margin: 21px 0 0 0;
+  color: #262626;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.textarea-input {
+  height: auto;
+}
+
+.create-article-form-tags-container {
+  margin-bottom: 21px;
+}
+
+.tags-list-element {
+  display: flex;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.tag-input {
+  width: 302px;
+  margin-right: 18px;
+}
+
+.tag-button {
+  display: flex;
+  width: 120px;
+  padding: 8px 16px;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-right: 18px;
+  border-radius: 4px;
+  border: 1px solid;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.tag-button:hover, .tag-button:active {
+  cursor: pointer;
+}
+
+.delete-tag-button {
+  border-color: #f5222d;
+  color: #f5222d;
+}
+
+.add-tag-button {
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+.send-article-button {
+  width: 319px;
+}
+
+.warning-input.textarea-warning-input {
+  height: 186px;
+  transform: translate(0, -190px);
+}
+
+.warning-input.tag-warning-input {
+  width: 302px;
+}
+
+.add-tag-container {
+  display: flex;
+  margin-top: 5px;
+}

@@ -1,0 +1,26 @@
+.likes-container {
+  display: flex;
+  align-items: center;
+}
+
+.likes-icon {
+  display: flex;
+  margin-right: 5px;
+  width: 16px;
+  height: 16px;
+  font-size: 20px;
+}
+
+.likes-icon:hover,
+.likes-icon:active {
+  cursor: pointer;
+}
+
+.likes-count {
+  color: rgba(0, 0, 0, 0.75);
+  font-family: Inter UI;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+}

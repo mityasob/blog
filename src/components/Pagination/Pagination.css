@@ -1,0 +1,89 @@
+.pagination {
+  display: flex;
+  width: 204px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.pagination li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 8px;
+  width: 22px;
+  height: 22px;
+  text-align: center;
+  font-family: Inter UI;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.page-number {
+  width: 22px;
+  height: 22px;
+}
+
+.page-number:hover,
+.page-number:active {
+  cursor: pointer;
+  color: #fff;
+  background-color: #1890ff;
+  border-radius: 4px;
+}
+
+.arrow:hover,
+.arrow:active {
+  cursor: pointer;
+}
+
+.arrow-left {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-left: 1px solid #000;
+  border-bottom: 1px solid #000;
+  transform: rotate(45deg) skew(-5deg, -5deg);
+}
+
+.left-arrow-non-active {
+  border-left: 1px solid #979797;
+  border-bottom: 1px solid #979797;
+}
+
+.left-arrow-non-active:hover,
+.left-arrow-non-active:active {
+  cursor: auto;
+}
+
+.arrow-right {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  transform: translate(-2px) rotate(-45deg) skew(5deg, 5deg);
+}
+
+.right-arrow-non-active {
+  border-right: 1px solid #979797;
+  border-bottom: 1px solid #979797;
+}
+
+.right-arrow-non-active:hover,
+.right-arrow-non-active:active {
+  cursor: auto;
+}
+
+.page-non-selected {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.page-selected {
+  color: #fff;
+  background-color: #1890ff;
+  border-radius: 4px;
+}

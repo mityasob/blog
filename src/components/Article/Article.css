@@ -1,0 +1,133 @@
+.article-container {
+  display: flex;
+  justify-content: center;
+}
+
+.article.article-page-article {
+  padding: 17px 14px 24px 19px;
+}
+
+.article-content {
+  padding-right: 4px;
+  overflow: hidden;
+}
+
+.tags-container.article-page-tags-container {
+  margin-bottom: 16px;
+}
+
+.profile.article-page-profile {
+  top: 17px;
+}
+
+.edit-article-buttons-container {
+  position: absolute;
+  top: 93px;
+  right: 14px;
+}
+
+.article-page-button {
+  margin-left: 12px;
+  height: 33px;
+  border-radius: 5px;
+}
+
+.article-page-button:hover,
+.article-page-button:active {
+  cursor: pointer;
+}
+
+.delete-article-button {
+  width: 80px;
+  border: 1px solid #f5222d;
+}
+
+.edit-article-button {
+  width: 67px;
+  border: 1px solid var(--success-color, #52c41a);
+}
+
+.delete-article-modal-window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  top: 0;
+  right: -167px;
+  width: 240px;
+  height: 104px;
+  display: flex;
+  padding: 12px 16px;
+  flex-direction: column;
+  gap: 12px;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15);
+}
+
+.modal-window-content {
+  display: flex;
+}
+
+.modal-window-icon {
+  width: 16px;
+  height: 18px;
+  padding: 2px 1px;
+  margin-right: 8px;
+}
+
+.modal-window-text {
+  margin: 0;
+  color: #595959;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.modal-window-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.modal-window-no-button {
+  width: 36px;
+  height: 26px;
+  border-radius: 4px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  color: #595959;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.modal-window-no-button:hover,
+.modal-window-no-button:active {
+  cursor: pointer;
+}
+
+.modal-window-yes-button {
+  width: 39px;
+  height: 24px;
+  margin-left: 8px;
+  border-radius: 4px;
+  background: #1890ff;
+  color: #fff;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.modal-window-yes-button:hover,
+.modal-window-yes-button:active {
+  cursor: pointer;
+}

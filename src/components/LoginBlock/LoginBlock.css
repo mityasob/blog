@@ -1,0 +1,94 @@
+.login-block {
+  display: flex;
+  align-items: center;
+}
+.login-block button:hover {
+  cursor: pointer;
+}
+
+.sign-in {
+  display: flex;
+  width: 84px;
+  height: 35px;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sign-up {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 109px;
+  height: 51px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  border: 1px solid #52c41a;
+}
+
+.login-text {
+  margin: 0;
+  font-family: Inter UI;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.sign-in-text {
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.sign-up-text {
+  color: #52c41a;
+}
+
+.create-article-button {
+  width: 114px;
+  height: 33px;
+  border-radius: 5px;
+  border: 1px solid #52c41a;
+  color: #52c41a;
+  font-family: Inter UI;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.header-profile {
+  display: flex;
+  align-items: center;
+  margin: 0 27px;
+}
+
+.header-profile:hover, .header-profile:active {
+  cursor: pointer;
+}
+
+.profile-name {
+  margin-right: 13px;
+}
+
+.profile-name h6 {
+  margin: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-family: Inter UI;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.log-out-button {
+  width: 111px;
+  height: 53px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  color: rgba(0, 0, 0, 0.75);
+  font-family: Inter UI;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
