@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './ArticlesListContainer.css';
 import ArticlesList from '../ArticlesList';
@@ -36,6 +37,29 @@ const ArticlesListContainer = ({
       />
     </section>
   );
+};
+
+ArticlesListContainer.defaultProps = {
+  token: '',
+  loggedIn: false,
+  articles: [],
+  pageNumber: null,
+  articlesCount: null,
+  switchPage: () => {},
+  useLeftArrow: () => {},
+  useRightArrow: () => {},
+  isError: false,
+};
+ArticlesListContainer.PropTypes = {
+  token: PropTypes.string,
+  loggedIn: PropTypes.bool,
+  articles: PropTypes.arrayOf(PropTypes.object),
+  pageNumber: PropTypes.number,
+  articlesCount: PropTypes.number,
+  switchPage: PropTypes.func,
+  useLeftArrow: PropTypes.func,
+  useRightArrow: PropTypes.func,
+  isError: PropTypes.bool,
 };
 
 export default ArticlesListContainer;

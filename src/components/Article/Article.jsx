@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import PropTypes from 'prop-types';
 
 import './Article.css';
 import Likes from '../Likes/Likes';
@@ -170,6 +171,15 @@ const Article = ({ token, loggedIn }) => {
       )}
     </div>
   );
+};
+
+Article.defaultProps = {
+  token: '',
+  loggedIn: false,
+};
+Article.PropTypes = {
+  token: PropTypes.string,
+  loggedIn: PropTypes.bool,
 };
 
 export default Article;

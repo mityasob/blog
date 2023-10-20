@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import PropTypes from 'prop-types';
 
 import './EditArticlePage.css';
 
@@ -155,6 +156,15 @@ const EditArticlePage = ({ token, loggedIn }) => {
       </div>
     </section>
   );
+};
+
+EditArticlePage.defaultProps = {
+  token: '',
+  loggedIn: false,
+};
+EditArticlePage.PropTypes = {
+  token: PropTypes.string,
+  loggedIn: PropTypes.bool,
 };
 
 export default EditArticlePage;

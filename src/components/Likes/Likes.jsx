@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import './Likes.css';
 
 const Likes = ({ article, loggedIn, token }) => {
@@ -82,6 +84,17 @@ const Likes = ({ article, loggedIn, token }) => {
       )}
     </div>
   );
+};
+
+Likes.defaultProps = {
+  token: '',
+  loggedIn: false,
+  article: {},
+};
+Likes.PropTypes = {
+  token: PropTypes.string,
+  loggedIn: PropTypes.bool,
+  article: PropTypes.object,
 };
 
 export default Likes;

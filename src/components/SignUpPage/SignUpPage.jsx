@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import PropTypes from 'prop-types';
 
 import './SignUpPage.css';
 
@@ -197,6 +198,15 @@ const SignUpPage = ({ saveToken, logIn }) => {
       </div>
     </section>
   );
+};
+
+SignUpPage.defaultProps = {
+  logIn: () => {},
+  saveToken: () => {},
+};
+SignUpPage.PropTypes = {
+  logIn: PropTypes.func,
+  saveToken: PropTypes.func,
 };
 
 export default SignUpPage;

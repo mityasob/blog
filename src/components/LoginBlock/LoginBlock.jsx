@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import './LoginBlock.css';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import './LoginBlock.css';
 
 const LoginBlock = ({ token, loggedIn, logOut }) => {
   const [userData, setUserData] = useState(null);
@@ -68,6 +70,17 @@ const LoginBlock = ({ token, loggedIn, logOut }) => {
       </Link>
     </div>
   );
+};
+
+LoginBlock.defaultProps = {
+  token: '',
+  loggedIn: false,
+  logOut: () => {},
+};
+LoginBlock.PropTypes = {
+  token: PropTypes.string,
+  loggedIn: PropTypes.bool,
+  logOut: PropTypes.func,
 };
 
 export default LoginBlock;

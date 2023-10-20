@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import './Pagination.css';
 
@@ -54,6 +55,21 @@ const Pagination = ({ articlesCount, pageNumber, switchPage, useLeftArrow, useRi
       </li>
     </ul>
   );
+};
+
+Pagination.defaultProps = {
+  pageNumber: null,
+  articlesCount: null,
+  switchPage: () => {},
+  useLeftArrow: () => {},
+  useRightArrow: () => {},
+};
+Pagination.PropTypes = {
+  pageNumber: PropTypes.number,
+  articlesCount: PropTypes.number,
+  switchPage: PropTypes.func,
+  useLeftArrow: PropTypes.func,
+  useRightArrow: PropTypes.func,
 };
 
 export default Pagination;

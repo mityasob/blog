@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import './ArticlePreview.css';
 import Likes from '../Likes/Likes';
@@ -64,6 +65,17 @@ const ArticlePreview = ({ articleProps, loggedIn, token }) => {
       </div>
     </li>
   );
+};
+
+ArticlePreview.defaultProps = {
+  token: '',
+  loggedIn: false,
+  articleProps: {},
+};
+ArticlePreview.PropTypes = {
+  token: PropTypes.string,
+  loggedIn: PropTypes.bool,
+  articleProps: PropTypes.object,
 };
 
 export default ArticlePreview;

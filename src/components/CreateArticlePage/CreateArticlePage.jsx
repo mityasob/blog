@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import './CreateArticlePage.css';
 
@@ -178,6 +179,15 @@ const CreateArticlePage = ({ token, loggedIn }) => {
       </div>
     </section>
   );
+};
+
+CreateArticlePage.defaultProps = {
+  token: '',
+  loggedIn: false,
+};
+CreateArticlePage.PropTypes = {
+  token: PropTypes.string,
+  loggedIn: PropTypes.bool,
 };
 
 export default CreateArticlePage;

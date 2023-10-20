@@ -1,5 +1,6 @@
 import React from 'react';
 import { Spin, Space } from 'antd';
+import PropTypes from 'prop-types';
 
 import './ArticlesList.css';
 import ArticlePreview from '../ArticlePreview/ArticlePreview';
@@ -22,6 +23,19 @@ const ArticlesList = ({ articles, pageNumber, loggedIn, token }) => {
       <Spin size="large" />
     </Space>
   );
+};
+
+ArticlesList.defaultProps = {
+  token: '',
+  loggedIn: false,
+  articles: [],
+  pageNumber: null,
+};
+ArticlesList.PropTypes = {
+  token: PropTypes.string,
+  loggedIn: PropTypes.bool,
+  articles: PropTypes.arrayOf(PropTypes.object),
+  pageNumber: PropTypes.number,
 };
 
 export default ArticlesList;

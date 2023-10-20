@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import './Header.css';
 import LoginBlock from '../LoginBlock/LoginBlock';
@@ -15,6 +16,17 @@ const Header = ({ token, loggedIn, logOut }) => {
       <LoginBlock token={token} loggedIn={loggedIn} logOut={logOut} />
     </header>
   );
+};
+
+Header.defaultProps = {
+  token: '',
+  loggedIn: false,
+  logOut: () => {},
+};
+Header.PropTypes = {
+  token: PropTypes.string,
+  loggedIn: PropTypes.bool,
+  logOut: PropTypes.func,
 };
 
 export default Header;
