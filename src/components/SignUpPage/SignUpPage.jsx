@@ -204,7 +204,7 @@ SignUpPage.defaultProps = {
   logIn: () => {},
   saveToken: () => {},
 };
-SignUpPage.PropTypes = {
+SignUpPage.propTypes = {
   logIn: PropTypes.func,
   saveToken: PropTypes.func,
 };

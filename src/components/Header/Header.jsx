@@ -23,7 +23,7 @@ Header.defaultProps = {
   loggedIn: false,
   logOut: () => {},
 };
-Header.PropTypes = {
+Header.propTypes = {
   token: PropTypes.string,
   loggedIn: PropTypes.bool,
   logOut: PropTypes.func,

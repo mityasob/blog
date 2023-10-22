@@ -178,7 +178,7 @@ EditProfilePage.defaultProps = {
   loggedIn: false,
   saveToken: () => {},
 };
-EditProfilePage.PropTypes = {
+EditProfilePage.propTypes = {
   token: PropTypes.string,
   loggedIn: PropTypes.bool,
   saveToken: PropTypes.func,

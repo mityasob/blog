@@ -72,7 +72,7 @@ ArticlePreview.defaultProps = {
   loggedIn: false,
   articleProps: {},
 };
-ArticlePreview.PropTypes = {
+ArticlePreview.propTypes = {
   token: PropTypes.string,
   loggedIn: PropTypes.bool,
   articleProps: PropTypes.object,

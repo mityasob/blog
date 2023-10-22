@@ -50,7 +50,7 @@ ArticlesListContainer.defaultProps = {
   useRightArrow: () => {},
   isError: false,
 };
-ArticlesListContainer.PropTypes = {
+ArticlesListContainer.propTypes = {
   token: PropTypes.string,
   loggedIn: PropTypes.bool,
   articles: PropTypes.arrayOf(PropTypes.object),

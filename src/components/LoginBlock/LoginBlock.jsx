@@ -77,7 +77,7 @@ LoginBlock.defaultProps = {
   loggedIn: false,
   logOut: () => {},
 };
-LoginBlock.PropTypes = {
+LoginBlock.propTypes = {
   token: PropTypes.string,
   loggedIn: PropTypes.bool,
   logOut: PropTypes.func,

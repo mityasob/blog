@@ -91,7 +91,7 @@ Likes.defaultProps = {
   loggedIn: false,
   article: {},
 };
-Likes.PropTypes = {
+Likes.propTypes = {
   token: PropTypes.string,
   loggedIn: PropTypes.bool,
   article: PropTypes.object,

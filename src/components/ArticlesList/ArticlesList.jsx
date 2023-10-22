@@ -31,7 +31,7 @@ ArticlesList.defaultProps = {
   articles: [],
   pageNumber: null,
 };
-ArticlesList.PropTypes = {
+ArticlesList.propTypes = {
   token: PropTypes.string,
   loggedIn: PropTypes.bool,
   articles: PropTypes.arrayOf(PropTypes.object),

@@ -177,7 +177,7 @@ Article.defaultProps = {
   token: '',
   loggedIn: false,
 };
-Article.PropTypes = {
+Article.propTypes = {
   token: PropTypes.string,
   loggedIn: PropTypes.bool,
 };

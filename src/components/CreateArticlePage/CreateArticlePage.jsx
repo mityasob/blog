@@ -185,7 +185,7 @@ CreateArticlePage.defaultProps = {
   token: '',
   loggedIn: false,
 };
-CreateArticlePage.PropTypes = {
+CreateArticlePage.propTypes = {
   token: PropTypes.string,
   loggedIn: PropTypes.bool,
 };

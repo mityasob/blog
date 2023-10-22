@@ -162,7 +162,7 @@ EditArticlePage.defaultProps = {
   token: '',
   loggedIn: false,
 };
-EditArticlePage.PropTypes = {
+EditArticlePage.propTypes = {
   token: PropTypes.string,
   loggedIn: PropTypes.bool,
 };

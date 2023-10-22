@@ -64,7 +64,7 @@ Pagination.defaultProps = {
   useLeftArrow: () => {},
   useRightArrow: () => {},
 };
-Pagination.PropTypes = {
+Pagination.propTypes = {
   pageNumber: PropTypes.number,
   articlesCount: PropTypes.number,
   switchPage: PropTypes.func,

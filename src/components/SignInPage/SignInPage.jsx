@@ -113,7 +113,7 @@ SignInPage.defaultProps = {
   logIn: () => {},
   saveToken: () => {},
 };
-SignInPage.PropTypes = {
+SignInPage.propTypes = {
   logIn: PropTypes.func,
   saveToken: PropTypes.func,
 };
