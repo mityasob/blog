@@ -99,8 +99,8 @@ const App = () => {
           }
         />
         <Route path="/articles/:slug" element={<Article token={token} loggedIn={loggedIn} />} />
-        <Route path="/sign-up" element={<SignUpPage saveToken={saveToken} logIn={logIn} />} />
-        <Route path="/sign-in" element={<SignInPage saveToken={saveToken} logIn={logIn} />} />
+        <Route path="/sign-up" element={<SignUpPage saveToken={saveToken} logIn={logIn} loggedIn={loggedIn} />} />
+        <Route path="/sign-in" element={<SignInPage saveToken={saveToken} logIn={logIn} loggedIn={loggedIn} />} />
         <Route
           path="/edit-profile"
           element={<EditProfilePage token={token} saveToken={saveToken} loggedIn={loggedIn} />}

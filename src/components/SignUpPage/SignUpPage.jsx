@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import './SignUpPage.css';
 
-const SignUpPage = ({ saveToken, logIn }) => {
+const SignUpPage = ({ saveToken, logIn, loggedIn }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isSignUpSuccess, setIsSignUpSuccess] = useState(false);
   const [signUpError, setSignUpError] = useState(false);
@@ -27,7 +27,7 @@ const SignUpPage = ({ saveToken, logIn }) => {
 
   return (
     <section className="articles-list-container">
-      {isSignUpSuccess && <Navigate to="/" />}
+      {(isSignUpSuccess || loggedIn) && <Navigate to="/" />}
       <div className="sign-up-container">
         <form
           className="authorization-form sign-up-form"
