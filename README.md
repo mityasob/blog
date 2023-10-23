@@ -1,1 +1,1 @@
-https://blog-47gdj86xc-mityasob.vercel.app/
+https://blog-7tntu1flt-mityasob.vercel.app/
