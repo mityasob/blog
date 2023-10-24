@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import './App.css';
@@ -9,7 +9,6 @@ import SignUpPage from '../SignUpPage/SignUpPage';
 import SignInPage from '../SignInPage/SignInPage';
 import EditProfilePage from '../EditProfilePage';
 import CreateArticlePage from '../CreateArticlePage/CreateArticlePage';
-import EditArticlePage from '../EditArticlePage/EditArticlePage';
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token'));
@@ -18,6 +17,19 @@ const App = () => {
   const [articlesCount, setArticlesCount] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
   const [isError, setIsError] = useState(false);
+  const getArticlesList = (articlesArray) => {
+    setList(articlesArray);
+  };
+  const getArticlesCount = (articlesArrayLength) => {
+    setArticlesCount(articlesArrayLength);
+  };
+  const articlesListReset = () => {
+    setList([]);
+    setArticlesCount(0);
+  };
+  const articlesLoadError = () => {
+    setIsError(true);
+  };
   const switchPage = (chosenPage) => {
     setPageNumber(Number(chosenPage.target.innerText));
   };
@@ -42,25 +54,6 @@ const App = () => {
   const saveToken = () => {
     setToken(localStorage.getItem('token'));
   };
-  useEffect(() => {
-    const requestOptions = {
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-    };
-    fetch('https://blog.kata.academy/api/articles', requestOptions)
-      .then((res) => {
-        const reader = res.json();
-        return reader;
-      })
-      .then((res) => {
-        setList(res.articles);
-        setArticlesCount(res.articles.length);
-      })
-      .catch(() => {
-        setIsError(true);
-      });
-  }, [token, list]);
 
   return (
     <section className="articles-list-page">
@@ -79,6 +72,10 @@ const App = () => {
               isError={isError}
               loggedIn={loggedIn}
               token={token}
+              getArticlesList={getArticlesList}
+              getArticlesCount={getArticlesCount}
+              articlesLoadError={articlesLoadError}
+              articlesListReset={articlesListReset}
             />
           }
         />
@@ -95,6 +92,10 @@ const App = () => {
               isError={isError}
               loggedIn={loggedIn}
               token={token}
+              getArticlesList={getArticlesList}
+              getArticlesCount={getArticlesCount}
+              articlesLoadError={articlesLoadError}
+              articlesListReset={articlesListReset}
             />
           }
         />
@@ -106,7 +107,7 @@ const App = () => {
           element={<EditProfilePage token={token} saveToken={saveToken} loggedIn={loggedIn} />}
         />
         <Route path="/new-article" element={<CreateArticlePage token={token} loggedIn={loggedIn} />} />
-        <Route path="/articles/:slug/edit" element={<EditArticlePage token={token} loggedIn={loggedIn} />} />
+        <Route path="/articles/:slug/edit" element={<CreateArticlePage token={token} loggedIn={loggedIn} />} />
       </Routes>
     </section>
   );

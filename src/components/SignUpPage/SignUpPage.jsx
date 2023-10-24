@@ -4,11 +4,14 @@ import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
 import './SignUpPage.css';
+import { createUser } from '../../api/api';
 
 const SignUpPage = ({ saveToken, logIn, loggedIn }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isSignUpSuccess, setIsSignUpSuccess] = useState(false);
   const [signUpError, setSignUpError] = useState(false);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const isButtonDisabled = isButtonClicked;
   const nonCheckStatus = {
     display: isChecked ? 'none' : 'flex',
   };
@@ -33,33 +36,8 @@ const SignUpPage = ({ saveToken, logIn, loggedIn }) => {
           className="authorization-form sign-up-form"
           onSubmit={handleSubmit((data, event) => {
             event.preventDefault();
-            const requestOptions = {
-              method: 'POST',
-              headers: {
-                accept: 'application/json',
-                'Content-Type': 'application/json;charset=utf-8',
-              },
-              body: `{"user": {
-                "username": "${data.username}",
-                "email": "${data.email}",
-                "password": "${data.password}"
-              }}`,
-            };
-            fetch('https://blog.kata.academy/api/users', requestOptions)
-              .then((res) => {
-                return res.json();
-              })
-              .then((res) => {
-                if (res.user) {
-                  localStorage.setItem('token', res.user.token);
-                  saveToken();
-                  logIn();
-                  setIsSignUpSuccess(true);
-                }
-                if (res.errors) {
-                  setSignUpError(true);
-                }
-              });
+            setIsButtonClicked(true);
+            createUser(data, saveToken, logIn, setIsSignUpSuccess, setSignUpError, setIsButtonClicked);
           })}
         >
           <p className="form-header">Create new account</p>
@@ -181,7 +159,7 @@ const SignUpPage = ({ saveToken, logIn, loggedIn }) => {
                 <p className="sign-up-error-message">Error! Try to refresh page and create account again!</p>
               </div>
             )}
-            <button type="submit" className="sign-up-submit">
+            <button type="submit" className="sign-up-submit" disabled={isButtonDisabled}>
               <span>Create</span>
             </button>
             <div className="sign-in-block">
@@ -203,10 +181,12 @@ const SignUpPage = ({ saveToken, logIn, loggedIn }) => {
 SignUpPage.defaultProps = {
   logIn: () => {},
   saveToken: () => {},
+  loggedIn: false,
 };
 SignUpPage.propTypes = {
   logIn: PropTypes.func,
   saveToken: PropTypes.func,
+  loggedIn: PropTypes.bool,
 };
 
 export default SignUpPage;

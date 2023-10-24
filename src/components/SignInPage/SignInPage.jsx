@@ -4,10 +4,13 @@ import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
 import './SignInPage.css';
+import { loginUser } from '../../api/api';
 
 const SignInPage = ({ saveToken, logIn, loggedIn }) => {
   const [isSignInSuccess, setIsSignInSuccess] = useState(false);
   const [signInError, setSignInError] = useState(false);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const isButtonDisabled = isButtonClicked;
   const {
     register,
     handleSubmit,
@@ -21,32 +24,8 @@ const SignInPage = ({ saveToken, logIn, loggedIn }) => {
           className="authorization-form"
           onSubmit={handleSubmit((data, event) => {
             event.preventDefault();
-            const requestOptions = {
-              method: 'POST',
-              headers: {
-                accept: 'application/json',
-                'Content-Type': 'application/json;charset=utf-8',
-              },
-              body: `{"user": {
-                "email": "${data.email}",
-                "password": "${data.password}"
-              }}`,
-            };
-            fetch('https://blog.kata.academy/api/users/login', requestOptions)
-              .then((res) => {
-                return res.json();
-              })
-              .then((res) => {
-                if (res.user) {
-                  localStorage.setItem('token', res.user.token);
-                  saveToken();
-                  logIn();
-                  setIsSignInSuccess(true);
-                }
-                if (res.errors) {
-                  setSignInError(true);
-                }
-              });
+            setIsButtonClicked(true);
+            loginUser(data, saveToken, logIn, setIsSignInSuccess, setSignInError, setIsButtonClicked);
           })}
         >
           <p className="form-header">Sign In</p>
@@ -79,7 +58,7 @@ const SignInPage = ({ saveToken, logIn, loggedIn }) => {
               {errors.password && (
                 <div className="input-error-message-container">
                   <div className="warning-input"></div>
-                  <p className="input-error-message">Password is required</p>
+                  <p className="input-error-message">Wrong Password</p>
                 </div>
               )}
             </label>
@@ -90,7 +69,7 @@ const SignInPage = ({ saveToken, logIn, loggedIn }) => {
                 <p className="sign-up-error-message">Wrong email or password</p>
               </div>
             )}
-            <button type="submit" className="sign-up-submit">
+            <button type="submit" className="sign-up-submit" disabled={isButtonDisabled}>
               <span>Login</span>
             </button>
             <div className="sign-in-block">
@@ -112,10 +91,12 @@ const SignInPage = ({ saveToken, logIn, loggedIn }) => {
 SignInPage.defaultProps = {
   logIn: () => {},
   saveToken: () => {},
+  loggedIn: false,
 };
 SignInPage.propTypes = {
   logIn: PropTypes.func,
   saveToken: PropTypes.func,
+  loggedIn: PropTypes.bool,
 };
 
 export default SignInPage;

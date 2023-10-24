@@ -4,12 +4,15 @@ import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 
 import './EditProfilePage.css';
+import { getProfile, updateProfile } from '../../api/api';
 
 const EditProfilePage = ({ token, saveToken, loggedIn }) => {
   const [isEditProfileSuccess, setIsEditProfileSuccess] = useState(false);
   const [editProfileError, setEditProfileError] = useState(false);
   const [currentUserIsLoad, setCurrentUserIsLoad] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const isButtonDisabled = isButtonClicked;
   const {
     register,
     handleSubmit,
@@ -23,21 +26,7 @@ const EditProfilePage = ({ token, saveToken, loggedIn }) => {
   });
 
   useEffect(() => {
-    const requestOptions = {
-      method: 'GET',
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-    };
-    fetch('https://blog.kata.academy/api/user', requestOptions)
-      .then((res) => {
-        const reader = res.json();
-        return reader;
-      })
-      .then((res) => {
-        setCurrentUserIsLoad(true);
-        setCurrentUser(res.user);
-      });
+    getProfile(token, setCurrentUser, setCurrentUserIsLoad);
   }, [token, currentUserIsLoad]);
 
   return (
@@ -49,35 +38,8 @@ const EditProfilePage = ({ token, saveToken, loggedIn }) => {
           className="authorization-form"
           onSubmit={handleSubmit((data, event) => {
             event.preventDefault();
-            const requestOptions = {
-              method: 'PUT',
-              headers: {
-                Authorization: `Token ${token}`,
-                'Content-Type': 'application/json;charset=utf-8',
-              },
-              body: `{
-                "user": {
-                  "email": "${data.email}",
-                  "username": "${data.username}",
-                  "bio": "",
-                  "image": "${data.avatar}"
-                }
-            }`,
-            };
-            fetch('https://blog.kata.academy/api/user', requestOptions)
-              .then((res) => {
-                return res.json();
-              })
-              .then((res) => {
-                if (res.user) {
-                  localStorage.setItem('token', res.user.token);
-                  saveToken();
-                  setIsEditProfileSuccess(true);
-                }
-                if (res.errors) {
-                  setEditProfileError(true);
-                }
-              });
+            setIsButtonClicked(true);
+            updateProfile(token, data, saveToken, setIsEditProfileSuccess, setEditProfileError, setIsButtonClicked);
           })}
         >
           <p className="form-header">Edit Profile</p>
@@ -140,7 +102,7 @@ const EditProfilePage = ({ token, saveToken, loggedIn }) => {
               )}
             </label>
             <label>
-              <p className="field-label">Avetar image (url)</p>
+              <p className="field-label">Avatar image (url)</p>
               <input
                 {...register('avatar', {
                   pattern: /^(https?|ftp|file):\/\/[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]/,
@@ -163,7 +125,7 @@ const EditProfilePage = ({ token, saveToken, loggedIn }) => {
                 <p className="sign-up-error-message">Error! Try to refresh page and edit profile again!</p>
               </div>
             )}
-            <button type="submit" className="sign-up-submit">
+            <button type="submit" className="sign-up-submit" disabled={isButtonDisabled}>
               <span>Save</span>
             </button>
           </div>

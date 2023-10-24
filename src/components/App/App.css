@@ -37,6 +37,9 @@ button {
 }
 
 .articles-list-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 90vw;
   min-width: 1280px;
   min-height: 977px;

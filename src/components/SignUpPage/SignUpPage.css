@@ -7,8 +7,8 @@
   align-items: flex-start;
   gap: 21px;
   border-radius: 6px;
-  border: 1px solid var(--grey-grey-5, #d9d9d9);
-  background: var(--grey-grey-1, #fff);
+  border: 1px solid #d9d9d9;
+  background: #fff;
   box-shadow:
     0px 0.6088px 2.93329px 0px rgba(0, 0, 0, 0.02),
     0px 1.46302px 7.04911px 0px rgba(0, 0, 0, 0.03),
@@ -144,6 +144,11 @@ input[type='checkbox'] {
 .sign-up-submit:hover,
 .sign-up-submit:active {
   cursor: pointer;
+}
+
+.sign-up-submit:disabled {
+  background: #d9d9d9;
+  cursor: auto;
 }
 
 .sign-up-submit span {

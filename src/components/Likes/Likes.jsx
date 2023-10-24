@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import './Likes.css';
+import { updateLikes } from '../../api/api';
 
 const Likes = ({ article, loggedIn, token }) => {
   const [isLiked, setIsliked] = useState(article.favorited);
@@ -13,49 +14,7 @@ const Likes = ({ article, loggedIn, token }) => {
     if (!loggedIn) {
       return;
     }
-    if (isLiked) {
-      const requestOptions = {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      };
-      fetch(`https://blog.kata.academy/api/articles/${article.slug}/favorite`, requestOptions)
-        .then((res) => {
-          const reader = res.json();
-          return reader;
-        })
-        .then((res) => {
-          if (res.article) {
-            setIsliked(false);
-            setLikesCount(res.article.favoritesCount);
-          }
-          if (res.errors) {
-            setLikeError(true);
-          }
-        });
-    } else {
-      const requestOptions = {
-        method: 'POST',
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      };
-      fetch(`https://blog.kata.academy/api/articles/${article.slug}/favorite`, requestOptions)
-        .then((res) => {
-          const reader = res.json();
-          return reader;
-        })
-        .then((res) => {
-          if (res.article) {
-            setIsliked(true);
-            setLikesCount(res.article.favoritesCount);
-          }
-          if (res.errors) {
-            setLikeError(true);
-          }
-        });
-    }
+    updateLikes(isLiked, token, article, setIsliked, setLikesCount, setLikeError);
   };
 
   return (

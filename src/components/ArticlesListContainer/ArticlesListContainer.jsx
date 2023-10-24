@@ -15,6 +15,10 @@ const ArticlesListContainer = ({
   isError,
   loggedIn,
   token,
+  getArticlesList,
+  getArticlesCount,
+  articlesLoadError,
+  articlesListReset,
 }) => {
   if (isError) {
     return (
@@ -27,7 +31,16 @@ const ArticlesListContainer = ({
   }
   return (
     <section className="articles-list-container">
-      <ArticlesList articles={articles} pageNumber={pageNumber} loggedIn={loggedIn} token={token} />
+      <ArticlesList
+        articles={articles}
+        pageNumber={pageNumber}
+        loggedIn={loggedIn}
+        token={token}
+        getArticlesList={getArticlesList}
+        getArticlesCount={getArticlesCount}
+        articlesLoadError={articlesLoadError}
+        articlesListReset={articlesListReset}
+      />
       <Pagination
         articlesCount={articlesCount}
         pageNumber={pageNumber}
@@ -49,6 +62,10 @@ ArticlesListContainer.defaultProps = {
   useLeftArrow: () => {},
   useRightArrow: () => {},
   isError: false,
+  getArticlesList: () => {},
+  getArticlesCount: () => {},
+  articlesLoadError: () => {},
+  articlesListReset: () => {},
 };
 ArticlesListContainer.propTypes = {
   token: PropTypes.string,
@@ -60,6 +77,10 @@ ArticlesListContainer.propTypes = {
   useLeftArrow: PropTypes.func,
   useRightArrow: PropTypes.func,
   isError: PropTypes.bool,
+  getArticlesList: PropTypes.func,
+  getArticlesCount: PropTypes.func,
+  articlesLoadError: PropTypes.func,
+  articlesListReset: PropTypes.func,
 };
 
 export default ArticlesListContainer;

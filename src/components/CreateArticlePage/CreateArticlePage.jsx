@@ -1,19 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import './CreateArticlePage.css';
+import { createArticle, getOwnArticle, updateArticle } from '../../api/api';
 
 const CreateArticlePage = ({ token, loggedIn }) => {
+  const { slug } = useParams();
+  const [article, setArticle] = useState(null);
   const [createArticleSuccess, setCreateArticleSuccess] = useState(false);
   const [createArticleError, setCreateArticleError] = useState(false);
+  const [editArticleSuccess, setEditArticleSuccess] = useState(false);
+  const [editArticleError, setEditArticleError] = useState(false);
   const [tagList, setTaglist] = useState([]);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const isButtonDisabled = isButtonClicked;
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    values: {
+      title: article?.title,
+      description: article?.description,
+      text: article?.body,
+    },
+  });
+
+  useEffect(() => {
+    if (slug) {
+      getOwnArticle(slug, setArticle, setTaglist);
+    }
+  }, [slug]);
 
   const spaceRemove = (event) => {
     if (event.target.value === ' ') {
@@ -39,52 +58,35 @@ const CreateArticlePage = ({ token, loggedIn }) => {
     return (
       <li key={element} className="tags-list-element">
         <div className="field-input tag-input">{element}</div>
-        <button type="button" className="tag-button delete-tag-button" onClick={removeTag}>
-          Delete
-        </button>
+        {!slug && (
+          <button type="button" className="tag-button delete-tag-button" onClick={removeTag}>
+            Delete
+          </button>
+        )}
       </li>
     );
   });
+  const articleTitle = !slug ? 'Create new article' : 'Edit article';
 
   return (
     <section className="articles-list-container">
       {!loggedIn && <Navigate to="/sign-in" />}
       {createArticleSuccess && <Navigate to="/" />}
+      {editArticleSuccess && <Navigate to={`/articles/${slug}`} />}
       <div className="article-editor-page">
         <form
           className="create-article-form"
           onSubmit={handleSubmit((data, event) => {
             event.preventDefault();
-            const requestOptions = {
-              method: 'POST',
-              headers: {
-                Authorization: `Token ${token}`,
-                accept: 'application/json',
-                'Content-Type': 'application/json;charset=utf-8',
-              },
-              body: `{"article": {
-                "title": "${data.title}",
-                "description": "${data.description}",
-                "body": "${data.text}",
-                "tagList": [
-                  "${tagList.join('", "')}"
-                ]
-              }}`,
-            };
-            fetch('https://blog.kata.academy/api/articles', requestOptions)
-              .then((res) => {
-                return res.json();
-              })
-              .then((res) => {
-                if (res.article) {
-                  setCreateArticleSuccess(true);
-                } else {
-                  setCreateArticleError(true);
-                }
-              });
+            setIsButtonClicked(true);
+            if (!slug) {
+              createArticle(token, data, tagList, setCreateArticleSuccess, setCreateArticleError, setIsButtonClicked);
+            } else {
+              updateArticle(token, data, slug, setEditArticleSuccess, setEditArticleError, setIsButtonClicked);
+            }
           })}
         >
-          <h3>Create new article</h3>
+          <h3>{articleTitle}</h3>
           <label>
             <p className="create-article-field-label">Title</p>
             <input
@@ -144,20 +146,22 @@ const CreateArticlePage = ({ token, loggedIn }) => {
           <div className="create-article-form-tags-container">
             <p className="create-article-field-label">Tags</p>
             <ul className="form-tags-list">{newTagArray}</ul>
-            <div className="add-tag-container">
-              <input
-                {...register('tag', {
-                  pattern: /[^\s]+/,
-                })}
-                type="text"
-                className="field-input tag-input"
-                placeholder="Tag"
-                onChange={spaceRemove}
-              />
-              <button type="button" className="tag-button add-tag-button" onClick={addTag}>
-                Add tag
-              </button>
-            </div>
+            {!slug && (
+              <div className="add-tag-container">
+                <input
+                  {...register('tag', {
+                    pattern: /[^\s]+/,
+                  })}
+                  type="text"
+                  className="field-input tag-input"
+                  placeholder="Tag"
+                  onChange={spaceRemove}
+                />
+                <button type="button" className="tag-button add-tag-button" onClick={addTag}>
+                  Add tag
+                </button>
+              </div>
+            )}
             {errors.tag && (
               <div className="input-error-message-container">
                 <div className="warning-input tag-warning-input"></div>
@@ -166,12 +170,12 @@ const CreateArticlePage = ({ token, loggedIn }) => {
             )}
           </div>
           <div className="form-footer">
-            {createArticleError && (
+            {(createArticleError || editArticleError) && (
               <div className="sign-up-error-container">
                 <p className="sign-up-error-message">Error! Try to refresh page and create article again!</p>
               </div>
             )}
-            <button type="submit" className="sign-up-submit send-article-button">
+            <button type="submit" className="sign-up-submit send-article-button" disabled={isButtonDisabled}>
               <span>Send</span>
             </button>
           </div>

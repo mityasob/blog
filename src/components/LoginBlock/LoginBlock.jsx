@@ -3,26 +3,13 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import './LoginBlock.css';
+import { getProfile } from '../../api/api';
 
 const LoginBlock = ({ token, loggedIn, logOut }) => {
   const [userData, setUserData] = useState(null);
   useEffect(() => {
-    const requestOptions = {
-      method: 'GET',
-      headers: {
-        Authorization: `Token ${token}`,
-      },
-    };
-    if (localStorage.length) {
-      fetch('https://blog.kata.academy/api/user', requestOptions)
-        .then((res) => {
-          return res.json();
-        })
-        .then((res) => {
-          if (res.user) {
-            setUserData(res.user);
-          }
-        });
+    if (loggedIn) {
+      getProfile(token, setUserData);
     }
   }, [token]);
 
